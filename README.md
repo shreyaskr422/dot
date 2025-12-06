@@ -1,4 +1,3 @@
-i
 ## Installation
 
 Install my-project with npm
