@@ -7,7 +7,6 @@
 
   "modules-right": [
     "pulseaudio",
-    "custom/uptime",
     "backlight",
     "battery",
     "network",
@@ -30,16 +29,6 @@
   "tray": {
     "icon-size": 16,
     "spacing": 10
-  },
-
-  "custom/music": {
-    "format": "  {}",
-    "escape": true,
-    "interval": 5,
-    "tooltip": false,
-    "exec": "playerctl metadata --format='{{ artist }} - {{ title }}'",
-    "on-click": "playerctl play-pause",
-    "max-length": 50
   },
 
   "clock": {
