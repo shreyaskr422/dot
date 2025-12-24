@@ -1,32 +1,45 @@
+##### POWERLEVEL10K INSTANT PROMPT (TOP ONLY)
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+##### COMPLETION
 ZSH_COMPDUMP="${ZDOTDIR:-$HOME}/.zcompdump"
-
 autoload -Uz compinit
+compinit -d "$ZSH_COMPDUMP"
 
-if [[ -f "$ZSH_COMPDUMP" && "$ZSH_COMPDUMP" -nt ~/.zshrc ]]; then
-    compinit -C -d "$ZSH_COMPDUMP"
-else
-    compinit -d "$ZSH_COMPDUMP"
-fi
-
+##### PLUGINS
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# MUST BE LAST PLUGIN
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+##### POWERLEVEL10K
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
+##### ALIASES
 alias ls="eza --icons --group-directories-first"
 alias ll="eza -la --git --header --group-directories-first"
 alias lt="eza --tree --level=2"
 
+##### FUNCTIONS
+download() {
+  aria2c -x 16 -s 16 -k 1M "$@"
+}
 
-HISTFILE=~/.zsh_history 
-export HISTFILESIZE=100000
-export SAVEHIST=5000 
-setopt INC_APPEND_HISTORY 
-setopt SHARE_HISTORY 
-setopt EXTENDED_HISTORY 
-setopt APPENDHISTORY 
-export HISTTIMEFORMAT="%d/%m/%Y %H:%M] "
+##### HISTORY
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=100000
+SAVEHIST=5000
+setopt INC_APPEND_HISTORY SHARE_HISTORY EXTENDED_HISTORY APPENDHISTORY
+export HISTTIMEFORMAT="%d/%m/%Y %H:%M "
+
+##### ENV
+export LIBVIRT_DEFAULT_URI="qemu:///system"
+
+##### OPTIONAL: Dart completion
+[[ -f "$HOME/.config/.dart-cli-completion/zsh-config.zsh" ]] \
+  && source "$HOME/.config/.dart-cli-completion/zsh-config.zsh"
+
