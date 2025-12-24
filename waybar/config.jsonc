@@ -1,126 +1,126 @@
 {
-  "layer": "top",
-  "position": "top",
-  "modules-left": [
-    "hyprland/workspaces"
-  ],
-  "modules-center": [
-    "clock"
-  ],
-  "modules-right": [
-    "pulseaudio",
-    "backlight",
-    "battery",
-    "network",
-    "custom/docker",
-    "tray",
-    "custom/lock",
-    "custom/power",
-    "custom/notification"
-  ],
-  "hyprland/workspaces": {
-    "format": "{name}: {icon}",
-    "format-icons": {
-      "active": "",
-      "default": ""
-    }
-  },
-  "tray": {
-    "icon-size": 16,
-    "spacing": 10
-  },
-  "clock": {
-    "timezone": "Asia/Kolkata",
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "format": "{:%a %d %b  %I:%M %p}",
-    "interval": 1
-  },
-  "battery": {
-    "states": {
-      "warning": 30,
-      "critical": 15
-    },
-    "format": "{icon} {capacity}%",
-    "format-charging": " {capacity}%",
-    "format-plugged": "{capacity}%",
-    "format-alt": "{time} {icon}",
-    "format-full": " {capacity}%",
-    "format-icons": [
-      "",
-      "",
-      ""
-    ]
-  },
-  "backlight": {
-    "device": "nvidia_wmi_ec_backlight",
-    "format": "{percent} {icon}",
-    "format-icons": [
-      ""
-    ],
-    "on-scroll-up": "brightnessctl s 1%+",
-    "on-scroll-down": "brightnessctl s 1%-",
-    "on-click-right": "brightnessctl s 0"
-  },
-  "network": {
-    "format-wifi": " 󰤢 ",
-    "format-ethernet": " 󰈀 ",
-    "format-disconnected": "󰤠 ",
-    "interval": 5,
-    "tooltip": false
-  },
-  "custom/uptime": {
-    "format": "{}",
-    "interval": 1600,
-    "exec": "sh -c '(uptime -p)'"
-  },
-  "pulseaudio": {
-    "format": "{icon}  {volume}%",
-    "format-muted": " Muted",
-    "format-icons": {
-      "headphone": "",
-      "hands-free": "",
-      "headset": "",
-      "phone": "",
-      "portable": "",
-      "car": "",
-      "default": [
-        "",
-        "",
-        ""
-      ]
-    },
-    "on-click": "pavucontrol"
-  },
-  "custom/power": {
-    "tooltip": false,
-    "on-click": "wlogout &",
-    "format": "⏻"
-  },
-  "custom/docker": {
-    "format": "{}",
-    "return-type": "json",
-    "interval": 10,
-    "exec": "$(pwd)/scripts/docker-stats/docker-stats",
-    "tooltip": true
-  },
-  "custom/notification": {
-    "tooltip": true,
-    "format": "<span size='16pt'>{icon}</span>",
-    "format-icons": {
-      "notification": "󱅫",
-      "none": "󰂜",
-      "dnd-notification": "󰂠",
-      "dnd-none": "󰪓",
-      "inhibited-notification": "󰂛",
-      "inhibited-none": "󰪑",
-      "dnd-inhibited-notification": "󰂛",
-      "dnd-inhibited-none": "󰪑"
-    },
-    "return-type": "json",
-    "exec-if": "which swaync-client",
-    "exec": "swaync-client -swb",
-    "on-click": "swaync-client -t -sw",
-    "on-click-right": "swaync-client -d -sw",
-    "escape": true
-  }
+	"layer": "top",
+	"position": "top",
+	"modules-left": [
+		"hyprland/workspaces"
+	],
+	"modules-center": [
+		"clock"
+	],
+	"modules-right": [
+		"pulseaudio",
+		"backlight",
+		"battery",
+		"network",
+		"custom/docker",
+		"tray",
+		"custom/lock",
+		"custom/power",
+		"custom/notification"
+	],
+	"hyprland/workspaces": {
+		"format": "{name}: {icon}",
+		"format-icons": {
+			"active": "",
+			"default": ""
+		}
+	},
+	"tray": {
+		"icon-size": 16,
+		"spacing": 10
+	},
+	"clock": {
+		"timezone": "Asia/Kolkata",
+		"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+		"format": "{:%a %d %b  %I:%M %p}",
+		"interval": 1
+	},
+	"battery": {
+		"states": {
+			"warning": 30,
+			"critical": 15
+		},
+		"format": "{icon} {capacity}%",
+		"format-charging": " {capacity}%",
+		"format-plugged": "{capacity}%",
+		"format-alt": "{time} {icon}",
+		"format-full": " {capacity}%",
+		"format-icons": [
+			"",
+			"",
+			""
+		]
+	},
+	"backlight": {
+		"device": "nvidia_wmi_ec_backlight",
+		"format": "{percent} {icon}",
+		"format-icons": [
+			""
+		],
+		"on-scroll-up": "brightnessctl s 1%+",
+		"on-scroll-down": "brightnessctl s 1%-",
+		"on-click-right": "brightnessctl s 0"
+	},
+	"network": {
+		"format-wifi": " 󰤢 ",
+		"format-ethernet": " 󰈀 ",
+		"format-disconnected": "󰤠 ",
+		"interval": 5,
+		"tooltip": false
+	},
+	"custom/uptime": {
+		"format": "{}",
+		"interval": 1600,
+		"exec": "sh -c '(uptime -p)'"
+	},
+	"pulseaudio": {
+		"format": "{icon}  {volume}%",
+		"format-muted": " Muted",
+		"format-icons": {
+			"headphone": "",
+			"hands-free": "",
+			"headset": "",
+			"phone": "",
+			"portable": "",
+			"car": "",
+			"default": [
+				"",
+				"",
+				""
+			]
+		},
+		"on-click": "pavucontrol"
+	},
+	"custom/power": {
+		"tooltip": false,
+		"on-click": "wlogout &",
+		"format": "⏻"
+	},
+	"custom/docker": {
+		"format": "{}",
+		"return-type": "json",
+		"interval": 10,
+		"exec": "$(pwd)/scripts/docker-stats/docker-stats",
+		"tooltip": true
+	},
+	"custom/notification": {
+		"tooltip": true,
+		"format": "<span size='16pt'>{icon}</span>",
+		"format-icons": {
+			"notification": "󱅫",
+			"none": "󰂜",
+			"dnd-notification": "󰂠",
+			"dnd-none": "󰪓",
+			"inhibited-notification": "󰂛",
+			"inhibited-none": "󰪑",
+			"dnd-inhibited-notification": "󰂛",
+			"dnd-inhibited-none": "󰪑"
+		},
+		"return-type": "json",
+		"exec-if": "which swaync-client",
+		"exec": "swaync-client -swb",
+		"on-click": "swaync-client -t -sw",
+		"on-click-right": "swaync-client -d -sw",
+		"escape": true
+	}
 }
