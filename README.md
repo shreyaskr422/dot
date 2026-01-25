@@ -14,7 +14,7 @@ yay -S \
   brightnessctl easyeffects networkmanager network-manager-applet os-prober \
   wezterm-git zsh-theme-powerlevel10k-git zsh-autosuggestions zsh-syntax-highlighting \
   eza nwg-look btop code mpv vim neovim ungoogled-chromium-bin \
-  ttf-iosevka-nerd ttf-jetbrains-mono-nerd noto-fonts-emoji
+  ttf-iosevka-nerd ttf-jetbrains-mono-nerd noto-fonts-emoji slurp grim \
 ```
 
 ### Reference
