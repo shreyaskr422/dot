@@ -38,7 +38,7 @@ External Requirements:
 > See [Install Recipes](#Install-Recipes) for additional Windows and Linux specific notes
 > and quick install snippets
 
-#### Install Kickstart
+### Install Kickstart
 
 > [!NOTE]
 > [Backup](#FAQ) your previous configuration (if any exists)

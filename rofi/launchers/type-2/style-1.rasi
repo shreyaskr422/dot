@@ -61,13 +61,13 @@ inputbar {
     border:                      0px solid;
     border-radius:               0px;
     border-color:                @selected;
-    background-color:            @selected;
-    text-color:                  @background;
+    background-color:            @background;
+    text-color:                  @foreground;
     children:                    [ "prompt", "entry" ];
 }
 
 prompt {
-    font:"Iosevka Nerd Font Propo 12";
+    font:"NotoSans Nerd Font Propo12";
     enabled:                     true;
     background-color:            inherit;
     text-color:                  inherit;
