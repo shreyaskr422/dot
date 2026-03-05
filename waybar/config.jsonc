@@ -11,18 +11,20 @@
 		"pulseaudio",
 		"backlight",
 		"battery",
-		"network",
+		/*"network",*/
 		"custom/docker",
 		"tray",
+		"custom/easyeffects",
 		"custom/lock",
-		"custom/power",
-		"custom/notification"
+		"power-profiles-daemon",
+		"custom/power"
+		/*"custom/notification"*/
 	],
 	"hyprland/workspaces": {
-		"format": "{name}: {icon}",
+		"format": "{name} {icon}",
 		"format-icons": {
-			"active": "",
-			"default": ""
+			"active": "󰣇",
+			"default": ""
 		}
 	},
 	"tray": {
@@ -37,6 +39,7 @@
 	},
 	"battery": {
 		"states": {
+			"good": 80,
 			"warning": 30,
 			"critical": 15
 		},
@@ -55,19 +58,28 @@
 		"device": "nvidia_wmi_ec_backlight",
 		"format": "{percent} {icon}",
 		"format-icons": [
-			""
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			""
 		],
 		"on-scroll-up": "brightnessctl s 1%+",
 		"on-scroll-down": "brightnessctl s 1%-",
 		"on-click-right": "brightnessctl s 0"
 	},
-	"network": {
+	/*"network": {
 		"format-wifi": " 󰤢 ",
 		"format-ethernet": " 󰈀 ",
 		"format-disconnected": "󰤠 ",
 		"interval": 5,
-		"tooltip": false
-	},
+		"tooltip": true,
+		"on-click": "nm-connection-editor"
+	},*/
 	"custom/uptime": {
 		"format": "{}",
 		"interval": 1600,
@@ -91,6 +103,24 @@
 		},
 		"on-click": "pavucontrol"
 	},
+	"power-profiles-daemon": {
+		"format": "{icon}",
+		"tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+		"tooltip": true,
+		"format-icons": {
+			"default": "",
+			"performance": "",
+			"balanced": "",
+			"power-saver": ""
+		}
+	},
+	"custom/easyeffects": {
+		"format": "󰗅",
+		"tooltip": false,
+		"exec": "pgrep easyeffects && echo on || echo off",
+		"interval": 5,
+		"on-click": "easyeffects"
+	},
 	"custom/power": {
 		"tooltip": false,
 		"on-click": "wlogout &",
@@ -103,7 +133,7 @@
 		"exec": "$(pwd)/scripts/docker-stats/docker-stats",
 		"tooltip": true
 	},
-	"custom/notification": {
+	/*"custom/notification": {
 		"tooltip": true,
 		"format": "<span size='16pt'>{icon}</span>",
 		"format-icons": {
@@ -122,5 +152,5 @@
 		"on-click": "swaync-client -t -sw",
 		"on-click-right": "swaync-client -d -sw",
 		"escape": true
-	}
+	}*/
 }
