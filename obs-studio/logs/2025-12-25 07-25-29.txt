@@ -1,0 +1,132 @@
+07:25:29.597: Crash or unclean shutdown detected
+07:25:30.720: [Safe Mode] Normal launch selected, loading third-party plugins is enabled
+07:25:30.721: Platform: Wayland
+07:25:30.721: CPU Name: AMD Ryzen 9 8940HX with Radeon Graphics
+07:25:30.721: CPU Speed: 1491.000MHz
+07:25:30.722: Physical Cores: 16, Logical Cores: 32
+07:25:30.722: Physical Memory: 15185MB Total, 7463MB Free
+07:25:30.722: Kernel Version: Linux 6.12.63-1-lts
+07:25:30.722: Distribution: "Arch Linux" Unknown
+07:25:30.722: Desktop Environment: Hyprland (Hyprland)
+07:25:30.722: Session Type: wayland
+07:25:30.729: Current Date/Time: 2025-12-25, 07:25:30 AM
+07:25:30.729: Browser Hardware Acceleration: true
+07:25:30.729: Qt Version: 6.10.1 (runtime), 6.10.1 (compiled)
+07:25:30.729: Portable mode: false
+07:25:30.741: OBS 32.0.2 (linux)
+07:25:30.741: ---------------------------------
+07:25:30.742: ---------------------------------
+07:25:30.742: audio settings reset:
+07:25:30.742: 	samples per sec: 48000
+07:25:30.742: 	speakers:        2
+07:25:30.742: 	max buffering:   960 milliseconds
+07:25:30.742: 	buffering type:  dynamically increasing
+07:25:30.742: ---------------------------------
+07:25:30.742: Initializing OpenGL...
+07:25:30.742: Using EGL/Wayland
+07:25:30.776: Initialized EGL 1.5
+07:25:30.786: Loading up OpenGL on adapter AMD AMD Radeon 610M (radeonsi, raphael_mendocino, LLVM 21.1.6, DRM 3.61, 6.12.63-1-lts)
+07:25:30.786: OpenGL loaded successfully, version 4.6 (Core Profile) Mesa 25.3.2-arch1.1, shading language 4.60
+07:25:30.803: ---------------------------------
+07:25:30.803: video settings reset:
+07:25:30.803: 	base resolution:   1920x1200
+07:25:30.803: 	output resolution: 1920x1200
+07:25:30.803: 	downscale filter:  Bicubic
+07:25:30.803: 	fps:               60/1
+07:25:30.803: 	format:            NV12
+07:25:30.803: 	YUV mode:          Rec. 709/Full
+07:25:30.803: NV12 texture support enabled
+07:25:30.803: P010 texture support not available
+07:25:30.804: Audio monitoring device:
+07:25:30.804: 	name: Default
+07:25:30.804: 	id: default
+07:25:30.805: ---------------------------------
+07:25:30.806: Failed to load 'en-US' text for module: 'decklink-captions.so'
+07:25:30.806: Failed to load 'en-US' text for module: 'decklink-output-ui.so'
+07:25:30.807: A DeckLink iterator could not be created.  The DeckLink drivers may not be installed
+07:25:30.807: Failed to initialize module 'decklink.so'
+07:25:30.864: [pipewire] Available capture sources:
+07:25:30.864: [pipewire]     - Monitor source
+07:25:30.864: [pipewire]     - Window source
+07:25:30.869: v4l2loopback not installed, virtual camera not registered
+07:25:30.876: LIBVA_DRIVER_NAME variable is set, this could prevent FFmpeg VAAPI from working correctly
+07:25:31.204: VAAPI: API version 1.22
+07:25:31.245: FFmpeg VAAPI H264 encoding supported
+07:25:31.438: FFmpeg VAAPI AV1 encoding supported
+07:25:31.626: FFmpeg VAAPI HEVC encoding supported
+07:25:31.762: [obs-nvenc] NVENC version: 13.0 (compiled) / 13.0 (driver), CUDA driver version: 13.10, AV1 supported: true
+07:25:32.521: [obs-websocket] [obs_module_load] you can haz websockets (Version: 5.6.3 | RPC Version: 1)
+07:25:32.521: [obs-websocket] [obs_module_load] Qt version (compile-time): 6.10.1 | Qt version (run-time): 6.10.1
+07:25:32.521: [obs-websocket] [obs_module_load] Linked ASIO Version: 103600
+07:25:32.524: [obs-websocket] [obs_module_load] Module loaded.
+07:25:32.526: ---------------------------------
+07:25:32.526:   Loaded Modules:
+07:25:32.526:     wlrobs.so
+07:25:32.526:     text-freetype2.so
+07:25:32.527:     rtmp-services.so
+07:25:32.527:     obs-x264.so
+07:25:32.527:     obs-websocket.so
+07:25:32.527:     obs-webrtc.so
+07:25:32.527:     obs-vst.so
+07:25:32.527:     obs-transitions.so
+07:25:32.527:     obs-qsv11.so
+07:25:32.527:     obs-outputs.so
+07:25:32.527:     obs-nvenc.so
+07:25:32.527:     obs-libfdk.so
+07:25:32.527:     obs-filters.so
+07:25:32.527:     obs-ffmpeg.so
+07:25:32.527:     linux-v4l2.so
+07:25:32.527:     linux-pulseaudio.so
+07:25:32.527:     linux-pipewire.so
+07:25:32.527:     linux-jack.so
+07:25:32.527:     linux-capture.so
+07:25:32.527:     linux-alsa.so
+07:25:32.527:     image-source.so
+07:25:32.527:     frontend-tools.so
+07:25:32.527:     decklink-output-ui.so
+07:25:32.527:     decklink-captions.so
+07:25:32.527: ---------------------------------
+07:25:32.527: ---------------------------------
+07:25:32.527: Available Encoders:
+07:25:32.527:   Video Encoders:
+07:25:32.527: 	- ffmpeg_svt_av1 (SVT-AV1)
+07:25:32.527: 	- ffmpeg_aom_av1 (AOM AV1)
+07:25:32.527: 	- ffmpeg_vaapi_tex (FFmpeg VAAPI H.264)
+07:25:32.527: 	- av1_ffmpeg_vaapi_tex (FFmpeg VAAPI AV1)
+07:25:32.527: 	- hevc_ffmpeg_vaapi_tex (FFmpeg VAAPI HEVC)
+07:25:32.527: 	- obs_nvenc_h264_tex (NVIDIA NVENC H.264)
+07:25:32.527: 	- obs_nvenc_hevc_tex (NVIDIA NVENC HEVC)
+07:25:32.527: 	- obs_nvenc_av1_tex (NVIDIA NVENC AV1)
+07:25:32.527: 	- obs_x264 (x264)
+07:25:32.527:   Audio Encoders:
+07:25:32.527: 	- ffmpeg_aac (FFmpeg AAC)
+07:25:32.527: 	- ffmpeg_opus (FFmpeg Opus)
+07:25:32.527: 	- ffmpeg_pcm_s16le (FFmpeg PCM (16-bit))
+07:25:32.527: 	- ffmpeg_pcm_s24le (FFmpeg PCM (24-bit))
+07:25:32.527: 	- ffmpeg_pcm_f32le (FFmpeg PCM (32-bit float))
+07:25:32.527: 	- ffmpeg_alac (FFmpeg ALAC (24-bit))
+07:25:32.527: 	- ffmpeg_flac (FFmpeg FLAC (16-bit))
+07:25:32.527: 	- libfdk_aac (libfdk AAC)
+07:25:32.527: ==== Startup complete ===============================================
+07:25:32.556: All scene data cleared
+07:25:32.556: ------------------------------------------------
+07:25:32.559: pulse-input: Server name: 'PulseAudio (on PipeWire 1.4.9) 15.0.0'
+07:25:32.559: pulse-input: Audio format: s32le, 48000 Hz, 2 channels
+07:25:32.559: pulse-input: Started recording from 'alsa_output.pci-0000_6a_00.6.analog-stereo.monitor' (default)
+07:25:32.559: [Loaded global audio device]: 'Desktop Audio'
+07:25:32.559: pulse-input: Server name: 'PulseAudio (on PipeWire 1.4.9) 15.0.0'
+07:25:32.560: pulse-input: Audio format: s32le, 48000 Hz, 2 channels
+07:25:32.560: pulse-input: Started recording from 'alsa_input.pci-0000_6a_00.6.analog-stereo' (default)
+07:25:32.560: [Loaded global audio device]: 'Mic/Aux'
+07:25:32.560: Switched to scene 'Scene'
+07:25:32.560: ------------------------------------------------
+07:25:32.560: Loaded scenes:
+07:25:32.560: - scene 'Scene':
+07:25:32.560:     - source: 'Wayland output(scpy)' (wlrobs-scpy)
+07:25:32.560:     - source: 'Wayland output(dmabuf)' (wlrobs-dmabuf)
+07:25:32.560: ------------------------------------------------
+07:25:32.618: Device for 'Audio Output Capture' source is also used for audio monitoring:
+07:25:32.618: Deduplication logic is being applied to all monitored sources.
+07:25:32.618: 
+07:25:33.134: adding 21 milliseconds of audio buffering, total audio buffering is now 21 milliseconds (source: Desktop Audio)
+07:25:33.134: 
