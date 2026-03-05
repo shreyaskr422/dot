@@ -1,0 +1,59 @@
+### ===== POSITION =====
+anchor=top-right
+layer=overlay
+margin=14
+padding=14
+max-visible=3
+
+### ===== SIZE =====
+width=320
+height=110
+border-size=0
+border-radius=12
+
+### ===== FONT =====
+font=Noto Sans 10
+
+### ===== COLORS (old-money tuned) =====
+background-color=#1C1C1CDD
+text-color=#E6E1CF
+progress-color=over #B5AE9B
+
+### ===== BEHAVIOR =====
+default-timeout=7000
+ignore-timeout=0
+sort=-time
+outer-margin=0
+
+### ===== ICONS =====
+icons=1
+max-icon-size=40
+icon-path=/usr/share/icons
+
+### ===== INTERACTION =====
+on-button-left=dismiss
+on-button-right=invoke-default-action
+on-button-middle=dismiss-all
+on-touch=dismiss
+
+### ===== GROUPING =====
+group-by=app-name
+format=%s\n%b
+
+### ===== URGENCY STYLING =====
+[urgency=low]
+background-color=#1C1C1CDD
+text-color=#B5AE9B
+default-timeout=4000
+
+[urgency=normal]
+background-color=#1C1C1CDD
+text-color=#E6E1CF
+default-timeout=6500
+
+[urgency=critical]
+background-color=#2A1F1FEE
+text-color=#F2D7D5
+border-size=2
+border-color=#C75C5C
+default-timeout=0
