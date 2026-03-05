@@ -104,6 +104,6 @@ sudo mkdir -p /etc/modprobe.d
 echo 'options nvidia NVreg_PreserveVideoMemoryAllocations=1' | sudo tee /etc/modprobe.d/nvidia-power-management.conf
 sudo mkinitcpio -P
 reboot
-
+```
 ### Reference
 For detailed configuration, visit the [Asus-Linux Arch Guide](https://asus-linux.org/guides/arch-guide/).
