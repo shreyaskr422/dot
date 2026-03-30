@@ -1,6 +1,5 @@
 #!/bin/bash
 # Wayland Screenshot Script (grim + slurp + wl-copy)
-# by @bautitobal
 DIR="$HOME/Pictures/Screenshots"
 mkdir -p "$DIR"
 

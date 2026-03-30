@@ -1,6 +1,5 @@
 #!/bin/bash
 # Universal Clipboard — Wayland (wl-clipboard + wtype + cliphist + rofi)
-# by @bautitobal
 
 set -euo pipefail
 
