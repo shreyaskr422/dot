@@ -6,112 +6,26 @@ import (
 	"io"
 	"net/http"
 	"os"
-	"strings"
 	"time"
 )
 
-const WTTR_API_URL = "https://wttr.in"
+// Patna coordinates — change if needed
+const (
+	LATITUDE  = "24.963129"
+	LONGITUDE = "83.608084"
+	API_URL   = "https://api.open-meteo.com/v1/forecast?latitude=" + LATITUDE + "&longitude=" + LONGITUDE + "&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m,relative_humidity_2m,precipitation&wind_speed_unit=ms&timezone=Asia%2FKolkata"
+)
 
-var weatherIcons = map[string]string{
-	"Clear":             "󰖙",
-	"Sunny":             "󰖙",
-	"PartlyCloudy":      "󰖕",
-	"Cloudy":            "󰖐",
-	"Overcast":          "󰖐",
-	"Mist":              "󰖑",
-	"Fog":               "󰖑",
-	"LightRain":         "󰖗",
-	"HeavyRain":         "󰖖",
-	"Rain":              "󰖗",
-	"LightSnow":         "󰖘",
-	"HeavySnow":         "󰖘",
-	"Snow":              "󰖘",
-	"Thunderstorm":      "󰖓",
-	"ThunderyShowers":   "󰖓",
-	"ThunderySnow":      "󰖓",
-	"Drizzle":           "󰖗",
-	"LightShowers":      "󰖗",
-	"HeavyShowers":      "󰖖",
-	"LightSleet":        "󰖘",
-	"HeavySleet":        "󰖘",
-	"Sleet":             "󰖘",
-	"Clear Night":       "󰖔",
-	"PartlyCloudyNight": "󰼱",
-}
-
-var weatherCodeIcons = map[string]string{
-	"113": "󰖙", // Sunny
-	"116": "󰖕", // Partly cloudy
-	"119": "󰖐", // Cloudy
-	"122": "󰖐", // Overcast
-	"143": "󰖑", // Mist
-	"176": "󰖗", // Patchy rain possible
-	"179": "󰖘", // Patchy snow possible
-	"182": "󰖘", // Patchy sleet possible
-	"185": "󰖘", // Patchy freezing drizzle possible
-	"200": "󰖓", // Thundery outbreaks possible
-	"227": "󰖘", // Blowing snow
-	"230": "󰖘", // Blizzard
-	"248": "󰖑", // Fog
-	"260": "󰖑", // Freezing fog
-	"263": "󰖗", // Patchy light drizzle
-	"266": "󰖗", // Light drizzle
-	"281": "󰖘", // Freezing drizzle
-	"284": "󰖘", // Heavy freezing drizzle
-	"293": "󰖗", // Patchy light rain
-	"296": "󰖗", // Light rain
-	"299": "󰖗", // Moderate rain at times
-	"302": "󰖗", // Moderate rain
-	"305": "󰖖", // Heavy rain at times
-	"308": "󰖖", // Heavy rain
-	"311": "󰖘", // Light freezing rain
-	"314": "󰖘", // Moderate or heavy freezing rain
-	"317": "󰖘", // Light sleet
-	"320": "󰖘", // Moderate or heavy sleet
-	"323": "󰖘", // Patchy light snow
-	"326": "󰖘", // Light snow
-	"329": "󰖘", // Patchy moderate snow
-	"332": "󰖘", // Moderate snow
-	"335": "󰖘", // Patchy heavy snow
-	"338": "󰖘", // Heavy snow
-	"350": "󰖘", // Ice pellets
-	"353": "󰖗", // Light rain shower
-	"356": "󰖖", // Moderate or heavy rain shower
-	"359": "󰖖", // Torrential rain shower
-	"362": "󰖘", // Light sleet showers
-	"365": "󰖘", // Moderate or heavy sleet showers
-	"368": "󰖘", // Light snow showers
-	"371": "󰖘", // Moderate or heavy snow showers
-	"374": "󰖘", // Light showers of ice pellets
-	"377": "󰖘", // Moderate or heavy showers of ice pellets
-	"386": "󰖓", // Patchy light rain with thunder
-	"389": "󰖓", // Moderate or heavy rain with thunder
-	"392": "󰖓", // Patchy light snow with thunder
-	"395": "󰖓", // Moderate or heavy snow with thunder
-}
-
-type WttrResponse struct {
-	CurrentCondition []struct {
-		TempC       string `json:"temp_C"`
-		FeelsLikeC  string `json:"FeelsLikeC"`
-		WeatherDesc []struct {
-			Value string `json:"value"`
-		} `json:"weatherDesc"`
-		WeatherCode    string `json:"weatherCode"`
-		Humidity       string `json:"humidity"`
-		WindspeedKmph  string `json:"windspeedKmph"`
-		WinddirDegree  string `json:"winddirDegree"`
-		WindDir16Point string `json:"winddir16Point"`
-		PrecipMM       string `json:"precipMM"`
-	} `json:"current_condition"`
-	NearestArea []struct {
-		AreaName []struct {
-			Value string `json:"value"`
-		} `json:"areaName"`
-		Country []struct {
-			Value string `json:"value"`
-		} `json:"country"`
-	} `json:"nearest_area"`
+type OpenMeteoResponse struct {
+	Current struct {
+		Temperature     float64 `json:"temperature_2m"`
+		ApparentTemp    float64 `json:"apparent_temperature"`
+		WeatherCode     int     `json:"weather_code"`
+		WindSpeed       float64 `json:"wind_speed_10m"`
+		WindDirection   float64 `json:"wind_direction_10m"`
+		Humidity        float64 `json:"relative_humidity_2m"`
+		Precipitation   float64 `json:"precipitation"`
+	} `json:"current"`
 }
 
 type WaybarOutput struct {
@@ -121,29 +35,54 @@ type WaybarOutput struct {
 	Class   string `json:"class"`
 }
 
-func getIcon(condition string, code string) string {
-	cleanCondition := strings.ReplaceAll(condition, " ", "")
-	cleanCondition = strings.ReplaceAll(cleanCondition, "-", "")
+// WMO weather codes → icon + description + class
+type WeatherInfo struct {
+	Icon        string
+	Description string
+	Class       string
+}
 
-	if icon, exists := weatherIcons[cleanCondition]; exists {
-		return icon
+func getWeatherInfo(code int) WeatherInfo {
+	switch {
+	case code == 0:
+		return WeatherInfo{"󰖙", "Clear Sky", "clear"}
+	case code == 1:
+		return WeatherInfo{"󰖙", "Mainly Clear", "clear"}
+	case code == 2:
+		return WeatherInfo{"󰖕", "Partly Cloudy", "cloud"}
+	case code == 3:
+		return WeatherInfo{"󰖐", "Overcast", "cloud"}
+	case code == 45 || code == 48:
+		return WeatherInfo{"󰖑", "Foggy", "fog"}
+	case code >= 51 && code <= 57:
+		return WeatherInfo{"󰖗", "Drizzle", "rain"}
+	case code >= 61 && code <= 67:
+		return WeatherInfo{"󰖗", "Rain", "rain"}
+	case code >= 71 && code <= 77:
+		return WeatherInfo{"󰖘", "Snow", "snow"}
+	case code >= 80 && code <= 82:
+		return WeatherInfo{"󰖗", "Rain Showers", "rain"}
+	case code == 85 || code == 86:
+		return WeatherInfo{"󰖘", "Snow Showers", "snow"}
+	case code == 95:
+		return WeatherInfo{"󰖓", "Thunderstorm", "thunder"}
+	case code == 96 || code == 99:
+		return WeatherInfo{"󰖓", "Thunderstorm with Hail", "thunder"}
+	default:
+		return WeatherInfo{"󰖐", "Unknown", "normal"}
 	}
+}
 
-	if icon, exists := weatherCodeIcons[code]; exists {
-		return icon
-	}
-
-	return "󰖐"
+func windDirection(degrees float64) string {
+	dirs := []string{"N", "NE", "E", "SE", "S", "SW", "W", "NW"}
+	idx := int((degrees+22.5)/45) % 8
+	return dirs[idx]
 }
 
 func getWeather() (WaybarOutput, error) {
-	url := fmt.Sprintf("%s/?format=j1", WTTR_API_URL)
+	client := &http.Client{Timeout: 10 * time.Second}
 
-	client := &http.Client{
-		Timeout: 10 * time.Second,
-	}
-
-	resp, err := client.Get(url)
+	resp, err := client.Get(API_URL)
 	if err != nil {
 		return WaybarOutput{}, err
 	}
@@ -158,86 +97,33 @@ func getWeather() (WaybarOutput, error) {
 		return WaybarOutput{}, err
 	}
 
-	var weather WttrResponse
+	var weather OpenMeteoResponse
 	if err := json.Unmarshal(body, &weather); err != nil {
 		return WaybarOutput{}, err
 	}
 
-	if len(weather.CurrentCondition) == 0 {
-		return WaybarOutput{}, fmt.Errorf("no weather data available")
-	}
+	c := weather.Current
+	info := getWeatherInfo(c.WeatherCode)
 
-	current := weather.CurrentCondition[0]
-
-	locationName := ""
-	if len(weather.NearestArea) > 0 {
-		if len(weather.NearestArea[0].AreaName) > 0 {
-			locationName = weather.NearestArea[0].AreaName[0].Value
-		}
-
-		if len(weather.NearestArea[0].Country) > 0 {
-			locationName += ", " + weather.NearestArea[0].Country[0].Value
-		}
-	}
-
-	weatherCondition := ""
-	if len(current.WeatherDesc) > 0 {
-		weatherCondition = current.WeatherDesc[0].Value
-	}
-
-	weatherIcon := getIcon(weatherCondition, current.WeatherCode)
-
-	temperatureText := fmt.Sprintf("%s°C", current.TempC)
-
-	outputText := fmt.Sprintf("%s %s", weatherIcon, temperatureText)
-
-	windKmph := 0.0
-	fmt.Sscanf(current.WindspeedKmph, "%f", &windKmph)
-	windMs := windKmph / 3.6
+	text := fmt.Sprintf("%s %.0f°C", info.Icon, c.Temperature)
 
 	tooltip := fmt.Sprintf(
-		"%s\n%s\nTemperature: %s°C\nFeels like: %s°C\nHumidity: %s%%\nWind: %.1f m/s %s\nPrecipitation: %s mm\nUpdated: %s",
-		locationName,
-		weatherCondition,
-		current.TempC,
-		current.FeelsLikeC,
-		current.Humidity,
-		windMs,
-		current.WindDir16Point,
-		current.PrecipMM,
+		"Bhagwanpur, Bihar\n%s\nTemperature: %.1f°C\nFeels like: %.1f°C\nHumidity: %.0f%%\nWind: %.1f m/s %s\nPrecipitation: %.1f mm\nUpdated: %s",
+		info.Description,
+		c.Temperature,
+		c.ApparentTemp,
+		c.Humidity,
+		c.WindSpeed,
+		windDirection(c.WindDirection),
+		c.Precipitation,
 		time.Now().Format("15:04:05"),
 	)
 
-	weatherClass := "normal"
-	lowerCondition := strings.ToLower(weatherCondition)
-
-	if strings.Contains(lowerCondition, "rain") ||
-		strings.Contains(lowerCondition, "shower") ||
-		strings.Contains(lowerCondition, "drizzle") {
-		weatherClass = "rain"
-	} else if strings.Contains(lowerCondition, "snow") ||
-		strings.Contains(lowerCondition, "sleet") ||
-		strings.Contains(lowerCondition, "ice") {
-		weatherClass = "snow"
-	} else if strings.Contains(lowerCondition, "clear") ||
-		strings.Contains(lowerCondition, "sunny") {
-		weatherClass = "clear"
-	} else if strings.Contains(lowerCondition, "cloud") ||
-		strings.Contains(lowerCondition, "overcast") {
-		weatherClass = "cloud"
-	} else if strings.Contains(lowerCondition, "thunder") ||
-		strings.Contains(lowerCondition, "storm") {
-		weatherClass = "thunder"
-	} else if strings.Contains(lowerCondition, "fog") ||
-		strings.Contains(lowerCondition, "mist") {
-		weatherClass = "fog"
-	}
-
 	return WaybarOutput{
-		Text:    outputText,
+		Text:    text,
 		Tooltip: tooltip,
-		Alt:     weatherCondition,
-		Class:   weatherClass,
+		Alt:     info.Description,
+		Class:   info.Class,
 	}, nil
 }
 
@@ -250,7 +136,6 @@ func main() {
 			Alt:     "Error",
 			Class:   "error",
 		}
-
 		jsonOutput, _ := json.Marshal(errorOutput)
 		fmt.Println(string(jsonOutput))
 		return

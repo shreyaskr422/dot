@@ -1,10 +1,15 @@
 * {
-	font-family: "NotoSans Nerd Font Propo";
+	font-family: "SF Pro Display", "JetBrainsMono Nerd Font Propo";
 	font-size: 14px;
 	min-height: 0;
 	padding-right: 2px;
 	padding-left: 2px;
 	padding-bottom: 0px;
+}
+
+#tray>* {
+	min-width: 24px;
+	padding: 0 6px;
 }
 
 #waybar {
@@ -27,7 +32,7 @@
 }
 
 #workspaces button.active {
-	color: #CFC6B8;
+	color: #D4CFC3;
 	border-radius: 5px;
 }
 
@@ -65,8 +70,7 @@ button {
 	border-radius: 5px;
 }
 
-
-#power-profiles-daemon {
+/*#power-profiles-daemon {
 	color: #C0B49A;
 	margin-left: 6px;
 	padding: 0 8px;
@@ -83,7 +87,7 @@ button {
 #power-profiles-daemon.power-saver {
 	color: #7C7566;
 }
-
+*/
 #custom-easyeffects {
 	color: #C7C0AA;
 	margin: 0 6px;
@@ -117,7 +121,6 @@ button {
 
 #pulseaudio {
 	color: #BFC5C9;
-	/* #83A598; */
 	border-radius: 5px 0px 0px 5px;
 }
 
