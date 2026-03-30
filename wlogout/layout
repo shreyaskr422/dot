@@ -10,6 +10,7 @@
     "text" : "Reboot",
     "keybind" : "r"
 }
+
 {
     "label" : "logout",
     "action" : "loginctl kill-session $XDG_SESSION_ID",
