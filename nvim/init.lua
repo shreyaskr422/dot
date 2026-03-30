@@ -877,22 +877,22 @@ require('lazy').setup({
   },
 
   {
-    'scottmckendry/cyberdream.nvim', -- for brown theme just change to "vague-theme/vague.nvim"
+    'vague-theme/vague.nvim', -- for brown theme just change to "vague-theme/vague.nvim"  "scottmckendry/cyberdream.nvim"
     priority = 1000,
     lazy = false,
     config = function()
-      require('cyberdream').setup { -- for brown theme "vague"
-        --variant = 'light',
+      require('vague').setup { -- for brown theme "vague" "cyberdream"
+        variant = 'light',
         transparent = true,
         italic_comments = true,
         borderless_pickers = true,
         cache = true,
-        colors = {
-          bg = '#0f1117',
-        },
+        --        colors = {
+        --          bg = '#0f1117',
+        --        },
       }
 
-      vim.cmd.colorscheme 'cyberdream' -- for brown theme "vague" also
+      vim.cmd.colorscheme 'vague' -- for brown theme "vague" also "cyberdream"
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
